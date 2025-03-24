@@ -17,6 +17,7 @@ const extensionName = "st-extension-loretip";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 const extensionSettings = extension_settings[extensionName];
 const defaultSettings = {};
+const LoreTipDebug = true;
 
 const globalContext = SillyTavern.getContext();
 
@@ -54,6 +55,8 @@ function onButtonClick() {
 jQuery(async () => {
   // This is an example of loading HTML from a file
   const settingsHtml = await $.get(`${extensionFolderPath}/settings.html`);
+
+  if(LoreTipDebug) console.log("Slub: Loaded Settings");
 
   // Append settingsHtml to extensions_settings
   // extension_settings and extensions_settings2 are the left and right columns of the settings menu
