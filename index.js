@@ -3,16 +3,22 @@
 
 //You'll likely need to import extension_settings, getContext, and loadExtensionSettings from extensions.js
 import { extension_settings, getContext, loadExtensionSettings } from "../../../extensions.js";
+import {
+  ExtensionSettingsManager,
+  getActiveWorldInfo,
+} from 'sillytavern-utils-lib';
+import { WIEntry } from 'sillytavern-utils-lib/types/world-info';
 
 //You'll likely need to import some other functions from the main script
 import { saveSettingsDebounced } from "../../../../script.js";
 
 // Keep track of where your extension is located, name should match repo name
-const extensionName = "st-extension-loortip";
+const extensionName = "st-extension-loretip";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 const extensionSettings = extension_settings[extensionName];
 const defaultSettings = {};
 
+const globalContext = SillyTavern.getContext();
 
  
 // Loads the extension settings if they exist, otherwise initializes them to the defaults.
@@ -24,13 +30,13 @@ async function loadSettings() {
   }
 
   // Updating settings in the UI
-  $("#example_setting").prop("checked", extension_settings[extensionName].example_setting).trigger("input");
+  $("#LootTipsEnableToolTips").prop("checked", extension_settings[extensionName].example_setting).trigger("input");
 }
 
 // This function is called when the extension settings are changed in the UI
 function onExampleInput(event) {
   const value = Boolean($(event.target).prop("checked"));
-  extension_settings[extensionName].example_setting = value;
+  extension_settings[extensionName].LootTipEnable = value;
   saveSettingsDebounced();
 }
 
@@ -47,7 +53,7 @@ function onButtonClick() {
 // This function is called when the extension is loaded
 jQuery(async () => {
   // This is an example of loading HTML from a file
-  const settingsHtml = await $.get(`${extensionFolderPath}/example.html`);
+  const settingsHtml = await $.get(`${extensionFolderPath}/settings.html`);
 
   // Append settingsHtml to extensions_settings
   // extension_settings and extensions_settings2 are the left and right columns of the settings menu
@@ -55,7 +61,7 @@ jQuery(async () => {
   $("#extensions_settings").append(settingsHtml);
 
   // These are examples of listening for events
-  $("#my_button").on("click", onButtonClick);
+  $("#LootTipsEnableToolTips").on("click", onExampleInput);
   $("#example_setting").on("input", onExampleInput);
 
   // Load settings when starting things up (if you have any)
