@@ -1,12 +1,15 @@
-// The main script for the extension
-// The following are examples of some basic extension functionality
-
-//You'll likely need to import extension_settings, getContext, and loadExtensionSettings from extensions.js
-import { extension_settings, getContext, loadExtensionSettings } from "../../../extensions.js";
 import {
+  buildFancyDropdown,
+  buildPrompt,
+  BuildPromptOptions,
   ExtensionSettingsManager,
   getActiveWorldInfo,
 } from 'sillytavern-utils-lib';
+import { selected_group, st_createWorldInfoEntry, st_echo, this_chid } from 'sillytavern-utils-lib/config';
+import { ChatCompletionMessage, ExtractedData } from 'sillytavern-utils-lib/types';
+import { POPUP_TYPE } from 'sillytavern-utils-lib/types/popup';
+import { DEFAULT_LOREBOOK_DEFINITION, DEFAULT_LOREBOOK_RULES, DEFAULT_ST_DESCRIPTION } from './constants.js';
+import { DEFAULT_XML_DESCRIPTION, parseXMLOwn } from './xml.js';
 import { WIEntry } from 'sillytavern-utils-lib/types/world-info';
 
 //You'll likely need to import some other functions from the main script
