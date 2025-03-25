@@ -4,7 +4,7 @@ import {
   BuildPromptOptions,
   ExtensionSettingsManager,
   getActiveWorldInfo,
-} from 'sillytavern-utils-lib';
+} from 'sillytavern-utils-lib/types/world-info';
 import { selected_group, st_createWorldInfoEntry, st_echo, this_chid } from 'sillytavern-utils-lib/config';
 import { ChatCompletionMessage, ExtractedData } from 'sillytavern-utils-lib/types';
 import { POPUP_TYPE } from 'sillytavern-utils-lib/types/popup';
